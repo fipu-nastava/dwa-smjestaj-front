@@ -1,0 +1,46 @@
+{
+    "private": true,
+    "main": "index.js",
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development ./node_modules/webpack/bin/webpack.js --progress --hide-modules --config=./node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=./node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production ./node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=./node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "author": "Danijel Marić / PlayDigital",
+    "license": "ISC",
+    "dependencies": {
+        "aos": "^2.3.4",
+        "bootstrap": "^4.3.1",
+        "es6-promise": "^4.2.6",
+        "install": "^0.12.2",
+        "jquery": "^3.4.1",
+        "jsonp": "^0.2.1",
+        "lg-autoplay": "^1.0.4",
+        "lg-fullscreen": "^1.0.1",
+        "lg-hash": "^1.0.4",
+        "lg-pager": "^1.0.2",
+        "lg-share": "^1.1.0",
+        "lg-thumbnail": "^1.1.0",
+        "lg-video": "^1.2.2",
+        "lg-zoom": "^1.1.0",
+        "lightgallery": "^1.6.11",
+        "moment": "^2.24.0",
+        "npm": "^6.5.0",
+        "popper.js": "^1.15.0",
+        "vue": "^2.6.10",
+        "vue-router": "^3.0.6",
+        "vue-select": "^2.6.0",
+        "vue-types": "^1.5.3"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.26.5",
+        "browser-sync-webpack-plugin": "^2.0.1",
+        "cross-env": "^5.2.0",
+        "laravel-mix": "^2.1.14",
+        "node-sass": "^4.10.0"
+    }
+}

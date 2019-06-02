@@ -2,7 +2,7 @@
     <Loading v-if="loading" :loading="loading"></Loading>
     <div v-else>
         <form @submit.prevent="submit">
-            <h2>Detalji smještajne jedinice</h2>
+            <h2>Uređivanje cjenika</h2>
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">

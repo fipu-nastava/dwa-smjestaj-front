@@ -5,7 +5,6 @@
 </template>
 
 <script>
-    import Units from "./components/Units";
     export default {
         name: "App",
         components: {

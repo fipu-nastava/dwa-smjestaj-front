@@ -2,7 +2,7 @@
     <Loading v-if="loading" :loading="loading"></Loading>
     <div v-else>
         <form @submit.prevent="submit">
-            <h2>Uređivanje cjenika</h2>
+            <h2>Detalji smještajne jedinice</h2>
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
@@ -36,7 +36,7 @@
     export default {
         components: {SubmitButton, Loading},
         props: ['id'],
-        name: "UnitsForm",
+        name: "UnitForm",
         mounted() {
             this.getData();
         },

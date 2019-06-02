@@ -15,25 +15,26 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="unit in units">
+            <tr v-for="item in units">
                 <td>
-                    {{ unit.name }}
+                    {{ item.name }}
                 </td>
                 <td>
-                    {{ unit.description }}
+                    {{ item.description }}
                 </td>
                 <td>
-                    {{ unit.max_persons }}
+                    {{ item.max_persons }}
                 </td>
                 <td>
-                    {{ unit.created_at | datetime }}
+                    {{ item.created_at | datetime }}
                 </td>
                 <td>
-                    {{ unit.updated_at | datetime }}
+                    {{ item.updated_at | datetime }}
                 </td>
                 <td>
-                    <router-link class="btn btn-outline-primary" :to="{name: 'units.form', params: {id: unit.id}}">Uredi</router-link>
-                    <button @click.prevent="deleteItem(unit.id)" class="btn btn-outline-danger">Obriši</button>
+                    <router-link class="btn btn-outline-primary" :to="{name: 'pricelist.table', params: {unit_id: item.id}}">Uredi cjenik</router-link>
+                    <router-link class="btn btn-outline-primary" :to="{name: 'units.form', params: {id: item.id}}">Uredi jedinicu</router-link>
+                    <button @click.prevent="deleteItem(item.id)" class="btn btn-outline-danger">Obriši</button>
                 </td>
             </tr>
             </tbody>
@@ -45,7 +46,7 @@
     import Loading from "./Loading";
 
     export default {
-        name: "Units",
+        name: "UnitTable",
         components: {Loading},
         mounted() {
             this.getData();

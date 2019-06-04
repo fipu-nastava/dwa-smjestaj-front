@@ -1,6 +1,7 @@
 <template>
     <Loading v-if="loading" :loading="loading"></Loading>
     <div v-else>
+        <h3>Cjenik</h3>
         <router-link class="btn btn-primary" :to="{name: 'pricelist.form', params: {unit_id, id: 'new'}}">Dodaj</router-link>
 
         <table class="table table-bordered table-striped mt-4">

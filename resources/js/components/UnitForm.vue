@@ -35,7 +35,7 @@
 
     export default {
         components: {SubmitButton, Loading},
-        props: ['id'],
+        props: ['unit_id'],
         name: "UnitForm",
         mounted() {
             this.getData();
@@ -52,9 +52,9 @@
         },
         methods: {
             getData() {
-                if (this.id === 'new') return;
+                if (this.unit_id === 'new') return;
                 this.loading = true;
-                axios.get("/unit/" + this.id).then(({data}) => {
+                axios.get("/unit/" + this.unit_id).then(({data}) => {
                     this.loading = false;
                     this.unit = data.data;
                 });
@@ -64,10 +64,10 @@
 
                 this.submitLoading = true;
                 this.error = null;
-                if (this.id === 'new') {
+                if (this.unit_id === 'new') {
                     axios.post("/unit", this.unit)
                         .then((response) => {
-                            this.$router.back();
+                            this.$router.back(); //vraćanje na ekran s popisom svih unesenih smještajnih jedinica
                         })
                         .catch((error) => {
                             console.log(error);
@@ -77,13 +77,15 @@
                             this.submitLoading = false;
                         })
                 } else {
-                    axios.put("/unit/" + this.id, this.unit)
+                    axios.put("/unit/" + this.unit_id, this.unit)
                         .then((response) => {
-                            this.$router.back();
+                            this.$router.back(); //vraćanje na ekran s popisom svih unesenih smještajnih jedinica
                         })
                         .catch((error) => {
                             console.log(error);
-                            this.error = error.response.data;
+                            if (error && error.response) {
+                                this.error = error.response.data;
+                            }
                         })
                         .finally(() => {
                             this.submitLoading = false;

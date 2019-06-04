@@ -11,7 +11,7 @@ let mix = require('laravel-mix');
  |
  */
 //mix.setPublicPath('../../public').
-mix.js('resources/js/theme.js', 'public/js')
+mix.js('resources/js/main.js', 'public/js')
     .sass('resources/scss/theme.scss', 'public/css');
 
 mix.browserSync('localhost/fipu_smjestaj/public');

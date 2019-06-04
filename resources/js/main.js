@@ -8,6 +8,8 @@ import UnitForm from "./components/UnitForm";
 import UnitTable from "./components/UnitTable";
 import UnitDetails from "./components/UnitDetails";
 import UnitDetailsHome from "./components/UnitDetailsHome";
+import BookingList from "./components/BookingList";
+import BookingForm from "./components/BookingForm";
 
 // window.$ = window.jQuery = require("jquery");
 // import "bootstrap/dist/js/bootstrap"
@@ -18,12 +20,20 @@ window.axios = require('axios/index').create({
     baseURL: 'http://cantab.elaclo.com:5000/',
 });
 
+window._ = require('lodash');
+
 // Date/time manupulation library
 window.moment = require("moment");
 
 
 // Uključivanje VueRouter u trenutnu Vuejs instancu
 Vue.use(VueRouter);
+
+
+import VCalendar from 'v-calendar';
+
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar);
 
 
 //Debug mode kroz VueJS devtools chrome plugin (https://chrome.google.com/webstore/detail/vuejs-devtools/ljjemllljcmogpfapbkkighbhhppjdbg)
@@ -41,6 +51,8 @@ Vue.filter('date', (value) => {
 
 // Konfiguracija VUE Routera
 const routes = [
+
+    // Adminsitracijsko sučelje (sučelje za iznajmljivača)
     {
         path: '/units', component: UnitTable, name: 'units',
     },
@@ -55,6 +67,16 @@ const routes = [
             {path: 'pricelist/:pricelist_id', component: PricelistForm, props: true, name: 'pricelist.form',},
         ]
     },
+
+    // Booking sučelje (sučelje za gosta)
+    {
+        path: '/', component: BookingList, name: 'booking.list',
+    },
+    {
+        path: '/book-now/:unit_id', props:true, component: BookingForm, name: 'booking.book_now',
+    }
+
+
 ];
 
 // Inicijalizacija konfiguracije Vue Routera

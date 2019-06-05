@@ -8,8 +8,6 @@ import UnitForm from "./components/UnitForm";
 import UnitTable from "./components/UnitTable";
 import UnitDetails from "./components/UnitDetails";
 import UnitDetailsHome from "./components/UnitDetailsHome";
-import BookingList from "./components/BookingList";
-import BookingForm from "./components/BookingForm";
 
 // window.$ = window.jQuery = require("jquery");
 // import "bootstrap/dist/js/bootstrap"
@@ -83,13 +81,7 @@ const routes = [
         ]
     },
 
-    // Booking sučelje (sučelje za gosta)
-    {
-        path: '/', component: BookingList, name: 'booking.list',
-    },
-    {
-        path: '/book-now/:unit_id', props:true, component: BookingForm, name: 'booking.book_now',
-    }
+    // TODO: Booking sučelje (sučelje za gosta)
 
 
 ];

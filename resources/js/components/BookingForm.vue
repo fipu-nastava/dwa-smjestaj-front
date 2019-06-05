@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="success">
-            <div class="alert alert-success">
+            <div class="alert alert-success text-center">
                 <p>Rezervacija je uspješno poslana!</p>
             </div>
         </div>
@@ -15,47 +15,59 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Odaberi datum</label>
-                                <v-date-picker :disabled-dates="blockedDaysFormVcalendar" mode='range' @input="calcualtePrice" v-model='range'/>
-
-
-                            </div>
-                            <div class="form-group" v-if="calculatedPrice">
-                                <label>Cijena rezervacije</label>
-
-                                <BreakdownPrices :calculated-price="calculatedPrice"/>
+                                <v-date-picker
+                                        is-expanded
+                                        :columns="$screens({ default: 1, lg: 4 })"
+                                        is-inline :disabled-dates="blockedDaysFormVcalendar" mode='range' @input="calcualtePrice"
+                                        v-model='range'></v-date-picker>
 
                             </div>
-                            <div class="form-group">
-                                <label>Ime i prezime</label>
-                                <input type="text" v-model="reservation.customer_name" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>E-mail adresa</label>
-                                <input type="text" v-model="reservation.customer_email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Adresa</label>
-                                <input type="text" v-model="reservation.customer_address" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Država</label>
-                                <input type="text" v-model="reservation.customer_country" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Telefon</label>
-                                <input type="text" v-model="reservation.customer_phone" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Broj osoba</label>
-                                <input type="number" v-model="reservation.persons" class="form-control">
-                            </div>
+
+                            <template v-if="range">
+
+                                <div class="form-group" v-if="calculatedPrice">
+                                    <label>Cijena rezervacije</label>
+
+                                    <BreakdownPrices :calculated-price="calculatedPrice"/>
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Ime i prezime</label>
+                                    <input type="text" v-model="reservation.customer_name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>E-mail adresa</label>
+                                    <input type="text" v-model="reservation.customer_email" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Adresa</label>
+                                    <input type="text" v-model="reservation.customer_address" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Država</label>
+                                    <input type="text" v-model="reservation.customer_country" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Telefon</label>
+                                    <input type="text" v-model="reservation.customer_phone" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Broj osoba</label>
+                                    <select class="form-control">
+                                        <option :value="index" v-for="index in unit.max_persons">{{ index }}</option>
+                                    </select>
+                                </div>
+                            </template>
                         </div>
-                        <div v-if="error" class="card-footer text-danger">
-                            Greška! <br/>{{ error }}
-                        </div>
-                        <div class="card-footer">
-                            <SubmitButton :loading="submitLoading" type="submit">Spremi promjene</SubmitButton>
-                        </div>
+
+                        <template v-if="range">
+                            <div v-if="error" class="card-footer text-danger">
+                                Greška! <br/>{{ error }}
+                            </div>
+                            <div class="card-footer">
+                                <SubmitButton :loading="submitLoading" type="submit">Spremi promjene</SubmitButton>
+                            </div>
+                        </template>
                     </div>
                 </form>
             </div>
@@ -81,7 +93,7 @@
                 loading: false,
                 submitLoading: false,
                 error: null,
-                range: {},
+                range: null,
                 unit: {
                     photo: 'sadf.png',
                 },
@@ -109,18 +121,21 @@
             },
             getBlockedDays() {
                 axios.get("/unit/" + this.unit_id + "/get-blocked-days?date_from=2019-01-01&date_to=2020-01-01").then(({data}) => {
-                    //console.info("backendd dates", data.data);
                     let blockedDaysFormVcalendar = [];
                     _.forEach(data.data, (date) => {
                         blockedDaysFormVcalendar.push(new Date(moment(date, "YYYY-MM-DD")));
                     });
 
-                    //console.info("parsed dates", blockedDaysFormVcalendar);
                     this.blockedDaysFormVcalendar = blockedDaysFormVcalendar;
                 })
             },
             calcualtePrice() {
-                axios.get("/unit/" + this.unit_id + "/calculate-price", {params: {date_from: this.rangeStart, date_to: this.rangeEnd}}).then(({data}) => {
+                axios.get("/unit/" + this.unit_id + "/calculate-price", {
+                    params: {
+                        date_from: this.rangeStart,
+                        date_to: this.rangeEnd
+                    }
+                }).then(({data}) => {
                     this.calculatedPrice = data.data;
                 })
             },

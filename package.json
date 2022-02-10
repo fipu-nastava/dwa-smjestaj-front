@@ -43,6 +43,6 @@
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^5.2.0",
         "laravel-mix": "^2.1.14",
-        "node-sass": "^4.10.0"
+        "node-sass": "^7.0.0"
     }
 }

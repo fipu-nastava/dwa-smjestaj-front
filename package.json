@@ -39,7 +39,7 @@
         "vue-types": "^1.5.3"
     },
     "devDependencies": {
-        "browser-sync": "^2.26.5",
+        "browser-sync": "^2.29.1",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^5.2.0",
         "laravel-mix": "^2.1.14",
